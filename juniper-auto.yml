@@ -3,6 +3,20 @@ name: juniper
 topology:
   nodes:
 
+    rt-ixa:
+      kind: nokia_srlinux
+      #mgmt-ipv4: 172.80.80.5
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixrd3
+      #startup-config: configs/srlswitch.cfg 
+
+    rt-ufinet:
+      kind: nokia_srlinux
+      #mgmt-ipv4: 172.80.80.5
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixrd3
+      #startup-config: configs/srlswitch.cfg 
+    
     srlswitch:
       kind: nokia_srlinux
       #mgmt-ipv4: 172.80.80.5
@@ -19,6 +33,26 @@ topology:
       kind: cisco_iol
       image: arthurk99/cisco-iol:17.15.01 
       
+    wan1:
+      kind: linux
+      image: bprodoehl/wan-emulator:20230418
+      #mgmt-ipv4: 172.20.20.11
+      binds:
+        - configs/crea-bridge.sh:/root/crea-bridge.sh
+      exec:
+        - chmod +x /root/crea-bridge.sh
+        - bash /root/crea-bridge.sh    
+      
+    wan2:
+      kind: linux
+      image: bprodoehl/wan-emulator:20230418
+      #mgmt-ipv4: 172.20.20.12
+      binds:
+        - configs/crea-bridge.sh:/root/crea-bridge.sh
+      exec:
+        - chmod +x /root/crea-bridge.sh
+        - bash /root/crea-bridge.sh    
+    
     nornir:
       kind: linux
       image: esanchezv/kali-python3:latest 
