@@ -60,10 +60,7 @@ topology:
         - chmod +x /root/crea-bridge.sh
         - bash /root/crea-bridge.sh    
     
-    nornir:
-      kind: linux
-      image: esanchezv/kali-python3:latest 
-
+   
   links:
     - endpoints: ["rt-ixa:e1-1", "wan1:eth1"]
     - endpoints: ["rt-ufinet:e1-1", "wan2:eth1"]
