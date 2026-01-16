@@ -2,6 +2,14 @@ name: juniper
 
 topology:
   nodes:
+
+    srlswitch:
+      kind: nokia_srlinux
+      #mgmt-ipv4: 172.80.80.5
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixrd3
+      #startup-config: configs/srlswitch.cfg 
+    
     vjuno:
       kind: juniper_vjunosrouter
       image: arthurk99/juniper-vjunos-router:23.4  
