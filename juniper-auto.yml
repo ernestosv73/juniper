@@ -24,12 +24,11 @@ topology:
       #type: ixrd3
       #startup-config: configs/srlswitch.cfg   
     
-    srlswitch:
-      kind: nokia_srlinux
+    switch-agr:
+      kind: cisco_iol
       #mgmt-ipv4: 172.80.80.5
-      image: ghcr.io/nokia/srlinux:24.10.1
-      type: ixrd3
-      #startup-config: configs/srlswitch.cfg 
+      image: arthurk99/cisco-iol-l2:17.15.01 
+      type: L2
     
     vjuno:
       kind: juniper_vjunosrouter
@@ -66,5 +65,5 @@ topology:
     - endpoints: ["rt-ufinet:e1-1", "wan2:eth1"]
     - endpoints: ["wan1:eth2", "vjuno:eth1"]
     - endpoints: ["wan2:eth2", "vjuno:eth2"]
-    - endpoints: ["vjuno:eth3", "srlswitch:e1-1"]
-    - endpoints: ["rt-slas-core:Ethernet0/1", "srlswitch:e1-2"]   
+    - endpoints: ["vjuno:eth3", "switch-agr:eth1"]
+    - endpoints: ["rt-slas-core:Ethernet0/1", "switch-agr:eth2"]   
