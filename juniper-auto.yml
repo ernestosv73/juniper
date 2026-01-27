@@ -7,15 +7,15 @@ topology:
       kind: nokia_srlinux
       #mgmt-ipv4: 172.80.80.5
       image: ghcr.io/nokia/srlinux:24.10.1
-      type: ixrd3
-      #startup-config: configs/srlswitch.cfg 
+      type: ixr-d3
+      startup-config: configs/rt-ixa.cfg 
 
     rt-ufinet:
       kind: nokia_srlinux
       #mgmt-ipv4: 172.80.80.5
       image: ghcr.io/nokia/srlinux:24.10.1
-      type: ixrd3
-      #startup-config: configs/srlswitch.cfg 
+      type: ixr-d3
+      startup-config: configs/rt-ufinet.cfg 
 
     switch-wan:
       kind: cisco_iol
