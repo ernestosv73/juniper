@@ -17,12 +17,11 @@ topology:
       type: ixrd3
       #startup-config: configs/srlswitch.cfg 
 
-    #rt-core:
-      #kind: nokia_srlinux
+    switch-wan:
+      kind: cisco_iol
       #mgmt-ipv4: 172.80.80.5
-      #image: ghcr.io/nokia/srlinux:24.10.1
-      #type: ixrd3
-      #startup-config: configs/srlswitch.cfg   
+      image: arthurk99/cisco-iol-l2:17.15.01 
+      type: L2
     
     switch-agr:
       kind: cisco_iol
@@ -30,37 +29,30 @@ topology:
       image: arthurk99/cisco-iol-l2:17.15.01 
       type: L2
     
-    vjuno:
+    rt-core:
       kind: juniper_vmx
       image: vrnetlab/juniper_vmx:18.2R1.9
       #startup-config: srl.cli
   
-          
-    wan1:
+    srvweb:
+       kind: linux
+       image: docker.io/esanchezv/srvhttps:latest
+
+    PC-corpo:
       kind: linux
-      image: bprodoehl/wan-emulator:20230418
-      #mgmt-ipv4: 172.20.20.11
-      binds:
-        - configs/crea-bridge.sh:/root/crea-bridge.sh
+      image: docker.io/esanchezv/kaliipv6:latest
       exec:
-        - chmod +x /root/crea-bridge.sh
-        - bash /root/crea-bridge.sh    
-      
-    wan2:
-      kind: linux
-      image: bprodoehl/wan-emulator:20230418
-      #mgmt-ipv4: 172.20.20.12
-      binds:
-        - configs/crea-bridge.sh:/root/crea-bridge.sh
-      exec:
-        - chmod +x /root/crea-bridge.sh
-        - bash /root/crea-bridge.sh    
+        - ip -6 address add 2001:db8:ca01::2/64 dev eth1
+        #- ip -6 route del default dev eth0
+        - ip -6 route add default via 2001:db8:ca01::1           
     
    
   links:
-    - endpoints: ["rt-ixa:e1-1", "wan1:eth1"]
-    - endpoints: ["rt-ufinet:e1-1", "wan2:eth1"]
-    - endpoints: ["wan1:eth2", "vjuno:eth1"]
-    - endpoints: ["wan2:eth2", "vjuno:eth2"]
-    - endpoints: ["vjuno:eth3", "switch-agr:eth1"]
+    - endpoints: ["rt-ixa:e1-1", "rt-core:eth1"]
+    - endpoints: ["rt-ufinet:e1-1", "rt-core:eth2"]
+    - endpoints: ["rt-ixa:eth2", "switch-wan:eth1"]
+    - endpoints: ["rt-ufinet:eth2", "switch-wan:eth2"]
+    - endpoints: ["srvweb:eth1", "switch-wan:eth3"]
+    - endpoints: ["rt-core:eth3", "switch-agr:eth1"]
+    - endpoints: ["PC-corpo:eth1", "switch-agr:eth2"]
     
