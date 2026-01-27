@@ -35,10 +35,7 @@ topology:
       image: vrnetlab/juniper_vmx:18.2R1.9
       #startup-config: srl.cli
   
-    rt-slas-core:
-      kind: cisco_iol
-      image: arthurk99/cisco-iol:17.15.01 
-      
+          
     wan1:
       kind: linux
       image: bprodoehl/wan-emulator:20230418
@@ -66,4 +63,4 @@ topology:
     - endpoints: ["wan1:eth2", "vjuno:eth1"]
     - endpoints: ["wan2:eth2", "vjuno:eth2"]
     - endpoints: ["vjuno:eth3", "switch-agr:eth1"]
-    - endpoints: ["rt-slas-core:Ethernet0/1", "switch-agr:eth2"]   
+    
