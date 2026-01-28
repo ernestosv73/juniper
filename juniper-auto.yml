@@ -32,7 +32,7 @@ topology:
     rt-core:
       kind: juniper_vmx
       image: vrnetlab/juniper_vmx:18.2R1.9
-      #startup-config: srl.cli
+      startup-config: configs/vmx.cfg
   
     srvweb:
        kind: linux
