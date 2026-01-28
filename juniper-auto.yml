@@ -54,7 +54,7 @@ topology:
       image: esanchezv/kali-python3:latest 
       binds:
        - configs/nornir.sh:/root/nornir.sh
-       - configs/scripts:/root/scripts
+       - scripts:/root/scripts
       exec:
        - python3 -m pip config set global.break-system-packages true
        - chmod +x /root/nornir.sh
