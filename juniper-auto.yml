@@ -1,5 +1,7 @@
 name: juniper
-
+mgmt:
+  network: isp-bgp
+  ipv4-subnet: 172.90.90.0/24
 topology:
   nodes:
 
@@ -31,6 +33,7 @@ topology:
     
     rt-core:
       kind: juniper_vmx
+      mgmt-ipv4: 172.90.90.7
       image: vrnetlab/juniper_vmx:18.2R1.9
       startup-config: configs/vmx.cfg
   
