@@ -61,12 +61,12 @@ topology:
        - bash /root/nornir.sh    
    
   links:
-    - endpoints: ["rt-ixa:e1-1", "rt-core:eth1"]
-    - endpoints: ["rt-ufinet:e1-1", "rt-core:eth2"]
+    - endpoints: ["rt-ixa:e1-1", "rt-core:ge-0/0/0"]
+    - endpoints: ["rt-ufinet:e1-1", "rt-core:ge-0/0/1"]
     - endpoints: ["rt-ixa:e1-2", "switch-wan:eth1"]
     - endpoints: ["rt-ufinet:e1-2", "switch-wan:eth2"]
     - endpoints: ["srvweb:eth1", "switch-wan:eth3"]
-    - endpoints: ["rt-core:eth3", "switch-agr:eth1"]
+    - endpoints: ["rt-core:ge-0/0/3", "switch-agr:eth1"]
     - endpoints: ["PC-corpo:eth1", "switch-agr:eth2"]
     - endpoints: ["nornir:eth1", "switch-agr:eth3"]
     
