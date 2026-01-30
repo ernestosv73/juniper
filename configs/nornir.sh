@@ -2,7 +2,7 @@ apt update
 sleep 1
 apt install curl python3-dev build-essential libssl-dev libffi-dev -y
 sleep 3
-pip install nornir nornir-junos nornir-napalm nornir-utils
+pip install nornir nornir-junos nornir-utils
 sleep 3
 pip install pynetbox
 sleep 1
