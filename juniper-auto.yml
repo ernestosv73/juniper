@@ -26,7 +26,10 @@ topology:
       type: L2
     
     switch-agr:
-      kind: bridge
+      kind: cisco_iol
+      #mgmt-ipv4: 172.80.80.5
+      image: arthurk99/cisco-iol-l2:17.15.01 
+      type: L2
      
     
     rt-core:
@@ -64,7 +67,7 @@ topology:
     - endpoints: ["rt-ixa:e1-2", "switch-wan:eth1"]
     - endpoints: ["rt-ufinet:e1-2", "switch-wan:eth2"]
     - endpoints: ["srvweb:eth1", "switch-wan:eth3"]
-    - endpoints: ["rt-core:ge-0/0/3", "switch-agr:eth1"]
+    - endpoints: ["rt-core:ge-0/0/2", "switch-agr:eth1"]
     - endpoints: ["PC-corpo:eth1", "switch-agr:eth2"]
     - endpoints: ["nornir:eth1", "switch-agr:eth3"]
     
