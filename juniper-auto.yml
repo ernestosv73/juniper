@@ -26,10 +26,8 @@ topology:
       type: L2
     
     switch-agr:
-      kind: cisco_iol
-      #mgmt-ipv4: 172.80.80.5
-      image: arthurk99/cisco-iol-l2:17.15.01 
-      type: L2
+      kind: bridge
+     
     
     rt-core:
       kind: juniper_vmx
