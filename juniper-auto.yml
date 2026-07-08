@@ -14,34 +14,27 @@ topology:
 
     rt-ufinet:
       kind: nokia_srlinux
-      #mgmt-ipv4: 172.80.80.5
       image: ghcr.io/nokia/srlinux:24.10.1
       type: ixr-d3
       startup-config: configs/rt-ufinet.cfg 
 
-    switch-wan:
-      kind: cisco_iol
-      #mgmt-ipv4: 172.80.80.5
-      image: arthurk99/cisco-iol-l2:17.15.01 
-      type: L2
-    
-    switch-agr:
-      kind: cisco_iol
-      #mgmt-ipv4: 172.80.80.5
-      image: arthurk99/cisco-iol-l2:17.15.01 
-      type: L2
-     
-    
+    rt-transit:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixr-d3
+         
+       
     rt-core:
       kind: juniper_vmx
       mgmt-ipv4: 172.90.90.7
       image: vrnetlab/juniper_vmx:18.2R1.9
       startup-config: configs/vmx.cfg
-  
-    srvweb:
-       kind: linux
-       image: docker.io/esanchezv/srvhttps:latest
 
+    switch-agr:
+       kind: cisco_iol
+       image: vrnetlab/cisco_iol:l2-17.12.01 
+       type: L2
+    
     PC-corpo:
       kind: linux
       image: esanchezv/kali-python3:latest
@@ -64,9 +57,8 @@ topology:
   links:
     - endpoints: ["rt-ixa:e1-1", "rt-core:ge-0/0/0"]
     - endpoints: ["rt-ufinet:e1-1", "rt-core:ge-0/0/1"]
-    - endpoints: ["rt-ixa:e1-2", "switch-wan:eth1"]
-    - endpoints: ["rt-ufinet:e1-2", "switch-wan:eth2"]
-    - endpoints: ["srvweb:eth1", "switch-wan:eth3"]
+    - endpoints: ["rt-ixa:e1-2", "rt-transit:e1-1"]
+    - endpoints: ["rt-ufinet:e1-2", "rt-transit:e1-2"]
     - endpoints: ["rt-core:ge-0/0/2", "switch-agr:eth1"]
     - endpoints: ["PC-corpo:eth1", "switch-agr:eth2"]
     - endpoints: ["nornir:eth1", "switch-agr:eth3"]
