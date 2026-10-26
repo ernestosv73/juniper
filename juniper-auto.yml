@@ -32,7 +32,7 @@ topology:
 
     switch-agr:
        kind: cisco_iol
-       image: vrnetlab/cisco_iol:l2-17.12.01 
+       image: docker.io/edwin71/cisco-iol:L2-17.15.01
        type: L2
     
     PC-corpo:
